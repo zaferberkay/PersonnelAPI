@@ -1,6 +1,6 @@
 from rest_framework.permissions import IsAdminUser, SAFE_METHODS
 
-class IsAdminUserorReadOnly(IsAdminUser):
+class IsAdminOrReadOnly(IsAdminUser):
     def has_permission(self, request, view):
 
         if request.method in SAFE_METHODS:
