@@ -59,4 +59,33 @@ class RegisterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(data)
         return data
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'email'
+        )
+
+class CustomTokenSerializer(TokenSerializer):
+
+    user = UserSerializer(read_only=True)
+
+    class Meta(TokenSerializer.Meta):
+        fields = (
+            'key',
+            'user',
+            )
+
+class ProfileSerializer(serializers.ModelSerializer):
+    user=serializers.StringRelatedField()
+    class Meta:
+        model = Profile
+        fields = (
+            'id',
+            'image',
+            'about',
+            'user'
+        )        
 

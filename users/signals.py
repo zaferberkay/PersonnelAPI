@@ -10,3 +10,7 @@ def create_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
 #! püf noktası app.py'a refresh ettiğinde tetiklensin diye import ettimemiz gerekiyor
+@receiver(post_save, sender=User)
+def create_profile(sender, instance=None, created=False, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
